@@ -29,7 +29,7 @@ namespace mobile_train.Models
 
         }
 
-        public void getResourseOutputAsync(string article, ref getResourseOutput getResourseOutput) {
+        public async Task<getResourseOutput> getResourseOutputAsync(string article) {
 
             string url = "https://fandeco.ru/rest/product/resource";
             getResourseInput articleInput = new getResourseInput
@@ -45,9 +45,31 @@ namespace mobile_train.Models
             string result = t.Result.ToString();
 
             // пытаемся десереализовать нормальным методом
-            getResourseOutput = JsonSerializer.Deserialize<getResourseOutput>(result);
+            getResourseOutput getResourseOutput = JsonSerializer.Deserialize<getResourseOutput>(result);
             //Console.WriteLine(getResourseOutput.success);
+                return getResourseOutput;
         }
+
+        public getResourseOutput calculete(string article) {
+
+            string url = "https://fandeco.ru/rest/product/resource";
+            getResourseInput articleInput = new getResourseInput
+            {
+                article = article
+            };
+            string articleInputJson = JsonSerializer.Serialize<getResourseInput>(articleInput);
+
+            Console.WriteLine(articleInputJson);
+
+            var t = Task.Run(() => knocker.GetData(articleInputJson, url));
+            t.Wait();
+            string result = t.Result.ToString();
+
+            // пытаемся десереализовать нормальным методом
+            getResourseOutput getResourseOutput = JsonSerializer.Deserialize<getResourseOutput>(result);
+            //Console.WriteLine(getResourseOutput.success);
+            return getResourseOutput;
+        } 
 
     }
 }

@@ -30,7 +30,7 @@
         <ScrollView Grid.Row="1">
             <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
                 <Label Text="Введите артикул" FontSize="Title"/>
-                <Label Text="Тестовый текст" FontSize="16" Padding="0,0,0,0"/>
+                
                 <Label FontSize="16" Padding="0,24,0,0">
                     <Label.FormattedText>
                         <FormattedString>
@@ -49,6 +49,7 @@
                 <Label Text="{Binding Article}"/>
                 <ActivityIndicator IsRunning="{Binding IsGettingInfo}" />
                 <Label Text="{Binding IsGettingInfo}"/>
+                <Label Text="{Binding GetResourseFit_png1}" />
             </StackLayout>
         </ScrollView>
     </Grid>

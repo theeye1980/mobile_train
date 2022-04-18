@@ -11,7 +11,7 @@
         <Label Text="{Binding Description}" FontSize="Small"/>
         <Label Text="NewCustomField:" FontSize="Medium" />
         <Label Text="{Binding NewCustomField}" FontSize="Small"/>
-
+        
     </StackLayout>
     
 </ContentPage>

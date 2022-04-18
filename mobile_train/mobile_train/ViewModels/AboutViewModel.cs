@@ -3,6 +3,8 @@ using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using mobile_train.Models;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace mobile_train.ViewModels
 {
@@ -10,7 +12,8 @@ namespace mobile_train.ViewModels
     {
         private string article;
         private bool isGettingInfo;
-        private getResourseOutput getResourseOutput;
+        private string GetResourseFit_png;
+
         knocker knocker;
         
         public AboutViewModel()
@@ -23,27 +26,50 @@ namespace mobile_train.ViewModels
             OpenWebCommand = new Command(
                 
                 async () =>
-            //await Browser.OpenAsync("https://aka.ms/xamarin-quickstart")
-                { 
+            
+                {
+                    //cначала установим пометку выполнения операции
+                    await Task.Run(() =>
+                    {
+                        IsGettingInfo = true;
+
+                    }
+                    );
+
+                        Stopwatch stopwatch = new Stopwatch();
+                    //засекаем время начала операции
+                    stopwatch.Start();
+
                     Console.WriteLine("Вот так");
                     Console.WriteLine("Вот rак");
-                    IsGettingInfo = true;
+                    
                     //Получение данных и запись в переменную
-                    getResourseOutput = new getResourseOutput();
 
-                    knocker.getResourseOutputAsync(Article, ref getResourseOutput);
+                    
+
+                    GetResourse = await knocker.getResourseOutputAsync(Article);
                     Console.WriteLine("Тадам");
-                    Console.WriteLine(getResourseOutput.@object.fit_png);
+                    GetResourseFit_png1 = GetResourse.@object.fit_png;
+
+                    Console.WriteLine(GetResourseFit_png1);
                     //await DisplayAlert("Alert", getResourseOutput.@object.fit_png, "OK");
+                    stopwatch.Stop();
+                    //смотрим сколько миллисекунд было затрачено на выполнение
+                    Console.WriteLine(stopwatch.ElapsedMilliseconds);
+
+
                     IsGettingInfo = false;
                 }
                 
             );
         }
+
+        
+
         
         public ICommand OpenWebCommand { get; }
         public string Article { get => article; set => SetProperty(ref article, value); }
-        public getResourseOutput GetResourseOutput { get => getResourseOutput; set => SetProperty(ref getResourseOutput, value); }
         public bool IsGettingInfo { get => isGettingInfo; set => SetProperty(ref isGettingInfo, value); }
+        public string GetResourseFit_png1 { get => GetResourseFit_png; set => SetProperty(ref GetResourseFit_png, value); }
     }
 }

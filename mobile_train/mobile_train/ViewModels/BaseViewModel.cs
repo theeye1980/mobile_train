@@ -10,9 +10,12 @@ namespace mobile_train.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+        private getResourseOutput getResourse;
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
-
+ 
         bool isBusy = false;
+
+
         public bool IsBusy
         {
             get { return isBusy; }
@@ -26,7 +29,9 @@ namespace mobile_train.ViewModels
             set { SetProperty(ref title, value); }
         }
 
-        protected bool SetProperty<T>(ref T backingStore, T value,
+        public getResourseOutput GetResourse { get => getResourse; set => SetProperty(ref getResourse, value); }
+
+    protected bool SetProperty<T>(ref T backingStore, T value,
             [CallerMemberName] string propertyName = "",
             Action onChanged = null)
         {
