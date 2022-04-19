@@ -29,6 +29,11 @@ namespace mobile_train.Models
     {
         public List<SearchArticle> search_articles { get; set; }
         public string artikul_1c { get; set; }
+        public int price { get; set; }
+        public int old_price { get; set; }
+        public double weight { get; set; }
+        public string image { get; set; }
+        public string thumb { get; set; }
         public bool published { get; set; }
         public bool deleted { get; set; }
         public string fit_png { get; set; }

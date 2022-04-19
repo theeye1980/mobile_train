@@ -17,41 +17,59 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="52" />
+            <RowDefinition Height="52" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            
         </Grid.RowDefinitions>
-        <StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Start" VerticalOptions="Center">
-                <ContentView Padding="20,0,0,00" VerticalOptions="FillAndExpand">
-                    <Image Source="https://584c5dbd-593d-44f7-8470-c89579a522b3.selcdn.net/assets/images/products/200376/small/a3619sp-48bk.jpg?v=59658239" VerticalOptions="Center" HeightRequest="54" />
-                </ContentView>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Entry Text="{Binding Article}" Grid.Row="0" Grid.Column="0"  Grid.ColumnSpan="3"/>
+        
+        <Button Margin="0,10,0,0" Text="Получить информацию"
+                            Command="{Binding OpenWebCommand}"
+                            BackgroundColor="{StaticResource Primary}"
+                            TextColor="White" Grid.ColumnSpan="3" Grid.Row="1" />
+        <ActivityIndicator IsRunning="{Binding IsGettingInfo}" Grid.ColumnSpan="3" />
+        
+        <Image Grid.Row="2" Grid.Column="0" Source="{Binding Image}" />
+        <ScrollView Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="mainInfo" IsVisible="true">
+                <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+                    <!--<Label Grid.Row="1" Grid.Column="0" Text="Введите артикул" FontSize="Title"/>-->
+                <Label Text="{Binding Price}" />
+                <Label Text="{Binding Price_sale}" />
+
             </StackLayout>
-        </StackLayout>
-        <ScrollView Grid.Row="1">
-            <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
-                <Label Text="Введите артикул" FontSize="Title"/>
-                
-                <Label FontSize="16" Padding="0,24,0,0">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <FormattedString.Spans>
-                                <!--<Span Text="Learn more at "/>
-                                <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/> -->
-                            </FormattedString.Spans>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-                <Entry Text="{Binding Article}" />
-                <Button Margin="0,10,0,0" Text="Получить информацию"
-                        Command="{Binding OpenWebCommand}"
-                        BackgroundColor="{StaticResource Primary}"
-                        TextColor="White" />
-                <Label Text="{Binding Article}"/>
-                <ActivityIndicator IsRunning="{Binding IsGettingInfo}" />
-                <Label Text="{Binding IsGettingInfo}"/>
-                <Label Text="{Binding GetResourseFit_png1}" />
-            </StackLayout>
+
         </ScrollView>
+        <ScrollView Grid.Row="3" Grid.ColumnSpan="3" x:Name="StocksInfo" IsVisible="true">
+            <StackLayout Orientation="Vertical" Padding="10,14,10,14" Spacing="10" x:Name="stock">
+                <!--<Label Grid.Row="1" Grid.Column="0" Text="Введите артикул" FontSize="Title"/>-->
+                <!--<Label Text="Список моделей" HorizontalOptions="Center" FontSize="Large" />
+                <ListView x:Name="phonesList" ItemsSource="{Binding Phones}" />-->
+
+                <Label Text="Склады" HorizontalOptions="StartAndExpand" FontSize="Medium" />
+                <ListView x:Name="StocksList" ItemsSource="{Binding Stocks}" />
+
+
+            </StackLayout>
+
+        </ScrollView>
+        <ScrollView Grid.Row="4" Grid.ColumnSpan="3" IsVisible="false">
+            <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+
+                <Label Text="{Binding AllAbout}" />
+
+            </StackLayout>
+
+        </ScrollView>
+
     </Grid>
 
 </ContentPage>

@@ -50,7 +50,7 @@ namespace mobile_train.Models
                 return getResourseOutput;
         }
 
-        public getResourseOutput calculete(string article) {
+        public async Task<string> calculete(string article) {
 
             string url = "https://fandeco.ru/rest/product/resource";
             getResourseInput articleInput = new getResourseInput
@@ -66,9 +66,9 @@ namespace mobile_train.Models
             string result = t.Result.ToString();
 
             // пытаемся десереализовать нормальным методом
-            getResourseOutput getResourseOutput = JsonSerializer.Deserialize<getResourseOutput>(result);
+            //getResourseOutput getResourseOutput = JsonSerializer.Deserialize<getResourseOutput>(result);
             //Console.WriteLine(getResourseOutput.success);
-            return getResourseOutput;
+            return result;
         } 
 
     }
